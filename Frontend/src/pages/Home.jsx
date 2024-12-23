@@ -23,8 +23,8 @@ function Home() {
 
     const fetchProducts = async () => {
         try {
-            // const url = "https://deploy-mern-app-1-api.vercel.app/products"; // Make sure this URL is correct
-            const url = "http://localhost:5000/products";
+            const url = "https://sign-login-pract.vercel.app/products"; // Make sure this URL is correct
+            // const url = "http://localhost:5000/products";
 
             const headers = {
                 headers: {
