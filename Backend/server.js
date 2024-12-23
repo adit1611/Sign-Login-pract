@@ -9,7 +9,7 @@ const ProductRouter = require('./Routes/ProductRouter');
 
 const PORT = process.env.PORT || 5000;
 
-app.get('/',(req,res) => {
+app.get('/ping',(req,res) => {
     res.send('👋💞💞💓');
 })
 
