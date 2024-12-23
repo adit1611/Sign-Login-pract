@@ -31,8 +31,8 @@ function Login() {
             return handleError('email and password are required')
         }
         try {
-                    // const url = `https://deploy-mern-app-1-api.vercel.app/auth/login`;
-                    const url = "http://localhost:5000/auth/login"
+                    const url = `https://sign-login-pract.vercel.app/auth/login`;
+                    // const url = "http://localhost:5000/auth/login"
                     const response = await fetch(url, {
                         method: "POST",
                         headers: {
