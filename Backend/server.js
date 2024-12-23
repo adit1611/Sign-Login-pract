@@ -1,34 +1,38 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
-
+const bodyParser = require('body-parser');
 require('dotenv').config();
 require('./Models/db');
-const bodyParser = require('body-parser');
 
 const AuthRouter = require('./Routes/AuthRouter');
 const ProductRouter = require('./Routes/ProductRouter');
 
+const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Configure CORS
 const corsOptions = {
-    origin: 'https://sign-login-pract-vt.vercel.app', // Specify the origin
+    origin: 'https://sign-login-pract-vt.vercel.app', // Specify the frontend origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
+// Apply CORS options globally
 app.use(cors(corsOptions));
 
-app.get('/ping',(req,res) => {
-    res.send('👋💞💞💓');
-})
-
+// Body Parser Middleware
 app.use(bodyParser.json());
-app.use(cors());
+
+// Ping route for testing
+app.get('/ping', (req, res) => {
+    res.send('👋💞💞💓');
+});
+
+// Routes
 app.use('/auth', AuthRouter);
 app.use('/products', ProductRouter);
 
-
-app.listen(PORT, ()=> {
-    console.log(`Server is listening on ${PORT}`)
-})
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is listening on ${PORT}`);
+});
