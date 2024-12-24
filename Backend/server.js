@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 5000;
 const corsOptions = {
     origin: 'https://sign-login-pract-vt.vercel.app/', // Specify the frontend origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: ['Content-Type', 'Authorization'],
     };
 
 // Apply CORS options globally
