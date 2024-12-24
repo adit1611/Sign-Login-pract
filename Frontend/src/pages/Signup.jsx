@@ -11,7 +11,7 @@ function Signup() {
         password: '',
     });
 
-    const [loading, setLoading] = useState(false); // Loader state
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -34,9 +34,9 @@ function Signup() {
             return handleError('Password must be at least 6 characters long');
         }
 
-        setLoading(true); // Start loader
+        setLoading(true);
         try {
-            const url = `https://sign-login-pract.vercel.app/auth/signup`;
+            const url = `${process.env.REACT_APP_API_URL}/auth/signup`;
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -46,24 +46,27 @@ function Signup() {
             });
 
             if (!response.ok) {
+                if (response.status === 400) {
+                    throw new Error('Invalid input. Please check your details.');
+                } else if (response.status === 500) {
+                    throw new Error('Server error. Please try again later.');
+                }
                 throw new Error('Failed to signup. Please try again later.');
             }
 
             const result = await response.json();
-            const { success, message, error } = result;
+            const { success, message } = result;
 
             if (success) {
                 handleSuccess(message || 'Signup successful');
                 setTimeout(() => navigate('/login'), 1000);
-            } else if (error?.details?.[0]?.message) {
-                handleError(error.details[0].message);
             } else {
                 handleError(message || 'Signup failed. Please check your inputs.');
             }
         } catch (err) {
             handleError(err.message || 'An error occurred. Please try again.');
         } finally {
-            setLoading(false); // Stop loader
+            setLoading(false);
         }
     };
 
@@ -126,7 +129,7 @@ function Signup() {
                 <button
                     type="submit"
                     className={`self-center w-3/4 bg-blue-500 text-white py-2 rounded-lg font-medium transition duration-300 ${
-                        loading ? 'bg-gray-400 cursor-not-allowed' : 'hover:bg-blue-600'
+                        loading ? 'bg-gray-400 cursor-not-allowed' : 'hover:bg-blue-600 hover:scale-105'
                     }`}
                     disabled={loading}
                 >
