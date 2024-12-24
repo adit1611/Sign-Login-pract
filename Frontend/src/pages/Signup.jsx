@@ -36,7 +36,7 @@ function Signup() {
 
         setLoading(true);
         try {
-            const url = `${process.env.REACT_APP_API_URL}/auth/signup`;
+            const url = `https://sign-login-pract.vercel.app/auth/signup`;
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
