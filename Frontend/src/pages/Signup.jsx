@@ -37,12 +37,12 @@ function Signup() {
         setLoading(true);
         try {
             const url = `https://sign-login-pract.vercel.app/auth/signup`;
-            const response = await fetch(url, {
+             const response = await fetch(url, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(loginInfo)
+                body: JSON.stringify(signupInfo)
             });
 
             if (!response.ok) {
